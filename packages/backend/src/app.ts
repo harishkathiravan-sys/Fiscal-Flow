@@ -8,6 +8,12 @@ import clientRoutes from './modules/clients/client.routes';
 import documentRoutes from './modules/documents/document.routes';
 import ocrRoutes from './modules/documents/ocr.routes';
 import aiRoutes from './modules/ai/ai.routes';
+import invoiceRoutes from './modules/invoices/invoice.routes';
+import expenseRoutes from './modules/expenses/expense.routes';
+import bankRoutes from './modules/bank/bank.routes';
+import gstRoutes from './modules/gst/gst.routes';
+import reportRoutes from './modules/reports/report.routes';
+import insightRoutes from './modules/insights/insight.routes';
 import { errorHandler } from './middleware/errorHandler';
 
 const app = express();
@@ -23,17 +29,16 @@ app.use(
 
 // ─── Rate Limiting ───────────────────────────
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100,
+  windowMs: 15 * 60 * 1000,
+  max: 200,
   message: { error: 'Too many requests, please try again later.' },
 });
 app.use('/api', limiter);
 
-// Stricter rate limit for auth endpoints
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 20,
-  message: { error: 'Too many authentication attempts, please try again later.' },
+  message: { error: 'Too many authentication attempts.' },
 });
 app.use('/api/auth', authLimiter);
 
@@ -43,11 +48,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // ─── Health Check ────────────────────────────
 app.get('/api/health', (_req, res) => {
-  res.json({
-    status: 'ok',
-    timestamp: new Date().toISOString(),
-    environment: env.NODE_ENV,
-  });
+  res.json({ status: 'ok', timestamp: new Date().toISOString(), environment: env.NODE_ENV });
 });
 
 // ─── API Routes ─────────────────────────────
@@ -56,17 +57,17 @@ app.use('/api/clients', clientRoutes);
 app.use('/api/documents', documentRoutes);
 app.use('/api/documents', ocrRoutes);
 app.use('/api/ai', aiRoutes);
-// app.use('/api/organizations', organizationRoutes);
-// app.use('/api/accounts', accountRoutes);
-// app.use('/api/journal-entries', journalEntryRoutes);
-// app.use('/api/reports', reportRoutes);
+app.use('/api/invoices', invoiceRoutes);
+app.use('/api/expenses', expenseRoutes);
+app.use('/api/bank', bankRoutes);
+app.use('/api/gst', gstRoutes);
+app.use('/api/reports', reportRoutes);
+app.use('/api/insights', insightRoutes);
 
-// ─── 404 Handler ────────────────────────────
+// ─── 404 & Error ────────────────────────────
 app.use((_req, res) => {
   res.status(404).json({ error: 'Not found' });
 });
-
-// ─── Error Handler ───────────────────────────
 app.use(errorHandler);
 
 export default app;

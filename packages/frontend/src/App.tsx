@@ -27,6 +27,18 @@ import DocumentCenterPage from './pages/documents/DocumentCenterPage';
 // AI Agent
 import AgentPage from './pages/ai/AgentPage';
 
+// Invoices
+import InvoiceListPage from './pages/invoices/InvoiceListPage';
+import InvoiceDetailPage from './pages/invoices/InvoiceDetailPage';
+import InvoiceFormPage from './pages/invoices/InvoiceFormPage';
+
+// Expenses, Bank, GST, Reports, Insights
+import ExpenseListPage from './pages/expenses/ExpenseListPage';
+import BankAnalyzerPage from './pages/bank/BankAnalyzerPage';
+import GstToolsPage from './pages/gst/GstToolsPage';
+import ReportsPage from './pages/reports/ReportsPage';
+import InsightsPage from './pages/insights/InsightsPage';
+
 // ─── Dashboard Shell ────────────────────────
 
 function DashboardShell({ children }: { children: React.ReactNode }) {
@@ -146,6 +158,98 @@ function App() {
                   <ProtectedRoute>
                     <DashboardShell>
                       <AgentPage />
+                    </DashboardShell>
+                  </ProtectedRoute>
+                }
+              />
+
+              {/* ── Invoices ──────────────────── */}
+              <Route
+                path="/invoices"
+                element={
+                  <ProtectedRoute>
+                    <DashboardShell>
+                      <InvoiceListPage />
+                    </DashboardShell>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/invoices/new"
+                element={
+                  <ProtectedRoute>
+                    <DashboardShell>
+                      <InvoiceFormPage />
+                    </DashboardShell>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/invoices/:id"
+                element={
+                  <ProtectedRoute>
+                    <DashboardShell>
+                      <InvoiceDetailPage />
+                    </DashboardShell>
+                  </ProtectedRoute>
+                }
+              />
+
+              {/* ── Expenses ──────────────────── */}
+              <Route
+                path="/expenses"
+                element={
+                  <ProtectedRoute>
+                    <DashboardShell>
+                      <ExpenseListPage />
+                    </DashboardShell>
+                  </ProtectedRoute>
+                }
+              />
+
+              {/* ── Bank ──────────────────────── */}
+              <Route
+                path="/bank"
+                element={
+                  <ProtectedRoute>
+                    <DashboardShell>
+                      <BankAnalyzerPage />
+                    </DashboardShell>
+                  </ProtectedRoute>
+                }
+              />
+
+              {/* ── GST ───────────────────────── */}
+              <Route
+                path="/gst"
+                element={
+                  <ProtectedRoute>
+                    <DashboardShell>
+                      <GstToolsPage />
+                    </DashboardShell>
+                  </ProtectedRoute>
+                }
+              />
+
+              {/* ── Reports ───────────────────── */}
+              <Route
+                path="/reports"
+                element={
+                  <ProtectedRoute>
+                    <DashboardShell>
+                      <ReportsPage />
+                    </DashboardShell>
+                  </ProtectedRoute>
+                }
+              />
+
+              {/* ── Insights ──────────────────── */}
+              <Route
+                path="/insights"
+                element={
+                  <ProtectedRoute>
+                    <DashboardShell>
+                      <InsightsPage />
                     </DashboardShell>
                   </ProtectedRoute>
                 }
