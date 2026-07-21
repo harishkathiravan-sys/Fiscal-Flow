@@ -10,6 +10,8 @@ const envSchema = z.object({
   JWT_SECRET: z.string().min(16),
   JWT_EXPIRES_IN: z.string().default('7d'),
   OPENAI_API_KEY: z.string().optional(),
+  GEMINI_API_KEY: z.string().optional(),
+  AI_PROVIDER: z.enum(['openai', 'gemini']).optional(),
   GOOGLE_APPLICATION_CREDENTIALS: z.string().optional(),
   AWS_REGION: z.string().optional(),
   AWS_ACCESS_KEY_ID: z.string().optional(),

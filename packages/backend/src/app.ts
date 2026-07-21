@@ -7,6 +7,7 @@ import authRoutes from './modules/auth/auth.routes';
 import clientRoutes from './modules/clients/client.routes';
 import documentRoutes from './modules/documents/document.routes';
 import ocrRoutes from './modules/documents/ocr.routes';
+import aiRoutes from './modules/ai/ai.routes';
 import { errorHandler } from './middleware/errorHandler';
 
 const app = express();
@@ -53,11 +54,11 @@ app.get('/api/health', (_req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/clients', clientRoutes);
 app.use('/api/documents', documentRoutes);
+app.use('/api/documents', ocrRoutes);
+app.use('/api/ai', aiRoutes);
 // app.use('/api/organizations', organizationRoutes);
-app.use('/api/documents/ocr', ocrRoutes);
 // app.use('/api/accounts', accountRoutes);
 // app.use('/api/journal-entries', journalEntryRoutes);
-// app.use('/api/documents', documentRoutes);
 // app.use('/api/reports', reportRoutes);
 
 // ─── 404 Handler ────────────────────────────

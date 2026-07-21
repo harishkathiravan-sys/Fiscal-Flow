@@ -24,6 +24,9 @@ import ClientFormPage from './pages/clients/ClientFormPage';
 // Documents
 import DocumentCenterPage from './pages/documents/DocumentCenterPage';
 
+// AI Agent
+import AgentPage from './pages/ai/AgentPage';
+
 // ─── Dashboard Shell ────────────────────────
 
 function DashboardShell({ children }: { children: React.ReactNode }) {
@@ -131,6 +134,18 @@ function App() {
                   <ProtectedRoute>
                     <DashboardShell>
                       <DocumentCenterPage />
+                    </DashboardShell>
+                  </ProtectedRoute>
+                }
+              />
+
+              {/* ── AI Agent ──────────────────── */}
+              <Route
+                path="/ai"
+                element={
+                  <ProtectedRoute>
+                    <DashboardShell>
+                      <AgentPage />
                     </DashboardShell>
                   </ProtectedRoute>
                 }
