@@ -1,5 +1,5 @@
 import { type ReactNode } from 'react';
-import { Button, type ButtonProps } from './Button';
+import { Button } from './Button';
 
 // ─── Types ──────────────────────────────────
 
@@ -10,7 +10,7 @@ interface EmptyStateProps {
   action?: {
     label: string;
     onClick: () => void;
-    variant?: ButtonProps['variant'];
+    variant?: 'primary' | 'secondary' | 'danger' | 'ghost' | 'link';
   };
   children?: ReactNode;
 }
